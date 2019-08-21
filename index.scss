@@ -1,0 +1,37 @@
+@mixin multiOverHidden($line-number: 3, $bg: white, $line-height: 1.4) {
+  max-height: #{($line-number * $line-height)}em;
+  line-height: $line-height;
+  overflow: hidden;
+  box-sizing: content-box;
+
+  .inner {
+    float: right;
+    margin-left: -5px;
+    width: 100%;
+    word-break: break-all;
+  }
+
+  &::before {
+    float: left;
+    width: 5px;
+    content: '';
+    height: #{($line-number * $line-height)}em;
+  }
+
+  &::after {
+    float: right;
+    content: '...';
+    height: #{$line-height}em;
+    line-height: $line-height;
+    padding-right: 5px;
+    text-align: right;
+    width: 3em;
+    margin-left: -3em;
+    position: relative;
+    left: 100%;
+    top: -#{$line-height}em;
+    background: $bg;
+    /* 显示更好的效果 */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), $bg 60%, $bg);
+  }
+}
